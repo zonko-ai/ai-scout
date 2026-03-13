@@ -473,12 +473,17 @@
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 960px) {
     html, body { overflow: auto; }
-    .viewport { height: auto; min-height: 100dvh; overflow: visible; grid-template-rows: auto auto; }
+    .viewport { height: auto; overflow: visible; grid-template-rows: auto auto; }
     .hero {
-      flex-direction: column; padding: 32px 24px 60px;
-      text-align: center; justify-content: flex-start; gap: 40px;
+      flex-direction: column; padding: 0 24px;
+      text-align: center; justify-content: flex-start; gap: 0;
     }
-    .hero-content { max-width: 480px; order: 1; flex: none; margin: 0 auto; }
+    .hero-content {
+      max-width: 480px; order: 1; flex: none; margin: 0 auto;
+      min-height: calc(100dvh - 50px); /* fill first viewport minus scout strip */
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 32px 0 40px;
+    }
     .hero-headline {
       font-size: clamp(36px, 8vw, 52px);
       text-align: center; margin-left: auto; margin-right: auto;
@@ -488,15 +493,18 @@
     .hero-proof { justify-content: center; }
     .phone-wrap {
       order: 2; max-width: 280px; min-width: 240px; margin: 0 auto;
-      flex: none;
+      flex: none; padding-bottom: 60px;
+      /* Pull phone up so top ~80px peeks into first viewport */
+      margin-top: -60px;
     }
   }
   @media (max-width: 640px) {
-    .hero { padding: 24px 20px 48px; gap: 36px; }
+    .hero-content { padding: 24px 0 32px; }
+    .hero { padding: 0 20px; }
     .hero-headline { font-size: clamp(32px, 9vw, 44px); }
     .hero-proof { gap: 12px; }
     .scout-strip-label { display: none; }
-    .phone-wrap { max-width: 260px; min-width: 220px; }
+    .phone-wrap { max-width: 260px; min-width: 220px; margin-top: -48px; }
     .notif-stack { bottom: 24px; left: 6px; right: 6px; gap: 5px; }
     .notif { border-radius: 14px; padding: 8px 10px; }
     .notif-title { font-size: 12px; }
