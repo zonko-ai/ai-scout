@@ -507,22 +507,16 @@
     .cta { flex-direction: column; padding: 16px; gap: 10px; border-radius: 16px; }
     .cta input { padding: 10px 4px; width: 100%; font-size: 15px; }
     .cta-btn { width: 100%; padding: 16px; border-radius: 12px; font-size: 14px; text-align: center; }
-    .notif-stack { bottom: 24px; left: 6px; right: 6px; gap: 5px; }
-    .notif { border-radius: 14px; padding: 8px 10px; }
-    .notif-title { font-size: 12px; }
-    .notif-body { font-size: 11px; }
-    .notif-app-icon { width: 20px; height: 20px; font-size: 13px; border-radius: 5px; }
-    .notif-app-name { font-size: 10px; }
-    .notif-time-label { font-size: 10px; }
-    .dynamic-island { width: 72px; height: 22px; top: 8px; }
-    .ios-time { font-size: 48px; padding-top: 36px; }
-    .ios-date { font-size: 11px; }
-    .ios-weather { font-size: 11px; }
-    .sb { padding: 12px 20px 0; font-size: 11px; }
-    .iphone { border-radius: min(40px, 14%); }
-    .iphone-inner { border-radius: min(38px, 13.5%); }
-    .iphone-screen { border-radius: min(36px, 13%); }
-    .home-indicator { width: 80px; height: 3px; bottom: 6px; }
+    /* Keep phone internals left-aligned like real iOS */
+    .iphone-screen { text-align: left; }
+    .notif-stack { bottom: 28px; left: 8px; right: 8px; gap: 6px; }
+    .notif { border-radius: 16px; padding: 10px 12px; }
+    .notif-row { text-align: left; }
+    .notif-title { font-size: 13px; text-align: left; }
+    .notif-body { font-size: 12px; text-align: left; }
+    .notif-app-icon { width: 22px; height: 22px; font-size: 15px; border-radius: 6px; }
+    .notif-app-name { font-size: 11px; text-align: left; }
+    .notif-time-label { font-size: 11px; }
   }
 </style>
 </head>
