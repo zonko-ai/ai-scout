@@ -472,11 +472,16 @@
 
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 960px) {
-    html, body { height: auto; min-height: 100%; overflow: auto; }
-    .viewport { height: auto; overflow: visible; display: flex; flex-direction: column; }
+    html, body { height: auto; min-height: 0; overflow-x: hidden; overflow-y: auto; margin: 0; padding: 0; }
+    .viewport {
+      height: auto; min-height: 0; overflow-x: clip; overflow-y: visible;
+      display: flex; flex-direction: column;
+      margin: 0; padding: 0;
+    }
     .hero {
       flex-direction: column; padding: 0 24px;
-      text-align: center; justify-content: flex-start; gap: 0;
+      text-align: center; justify-content: flex-start;
+      gap: 0; margin: 0;
     }
     .hero-content {
       max-width: 480px; order: 1; flex: none; margin: 0 auto;
@@ -492,21 +497,20 @@
     .cta-wrap { max-width: 90vw; width: 100%; margin: 0 auto; }
     .hero-proof { justify-content: center; margin-top: 16px; }
     .phone-wrap {
-      order: 2; width: 75vw; max-width: 380px; min-width: 300px; margin: -60px auto 0;
+      order: 2; width: 75vw; max-width: 380px; min-width: 300px;
       flex: none; padding: 0;
+      margin: -60px auto 0 auto;
+      overflow: hidden; /* clip phone-glow extending beyond */
     }
-    .phone-wrap:last-child { margin-bottom: 0; }
   }
   @media (max-width: 640px) {
     .hero-content { padding: 20px 0 0; }
-    .hero { padding: 0 20px; }
+    .hero { padding: 0 24px; }
     .hero-sub { margin-bottom: 20px; }
     .hero-headline { font-size: clamp(32px, 9vw, 44px); }
     .hero-proof { gap: 12px; }
     .scout-strip-label { display: none; }
-    .phone-wrap { width: 80vw; max-width: 360px; min-width: 280px; margin: -48px auto 0; padding: 0; }
-    .hero { padding-bottom: 0 !important; }
-    .viewport { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+    .phone-wrap { width: 80vw; max-width: 360px; min-width: 280px; margin: -48px auto 0 auto; }
     .cta {
       flex-direction: column; gap: 0; padding: 0;
       background: none; border: none; box-shadow: none;
@@ -563,10 +567,6 @@
     .mobile-confirm-overlay .confirm-text {
       font-size: 15px; max-width: 280px; line-height: 1.6;
     }
-
-    /* Kill bottom space from body/viewport */
-    .viewport { margin-bottom: 0; padding-bottom: 0; }
-    .hero { padding-bottom: 0; margin-bottom: 0; }
   }
 </style>
 </head>
