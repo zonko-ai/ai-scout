@@ -504,9 +504,20 @@
     .hero-proof { gap: 12px; }
     .scout-strip-label { display: none; }
     .phone-wrap { width: 80vw; max-width: 360px; min-width: 280px; margin-top: -48px; padding-bottom: 0; }
-    .cta { flex-direction: column; padding: 16px; gap: 10px; border-radius: 16px; }
-    .cta input { padding: 10px 4px; width: 100%; font-size: 15px; }
-    .cta-btn { width: 100%; padding: 16px; border-radius: 12px; font-size: 14px; text-align: center; }
+    .cta {
+      flex-direction: column; gap: 0; padding: 0;
+      background: none; border: none; box-shadow: none;
+    }
+    .cta:focus-within { transform: none; box-shadow: none; }
+    .cta input {
+      width: 100%; font-size: 15px; padding: 14px 16px;
+      background: rgba(255,255,255,0.6); border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 10px;
+    }
+    .cta-btn {
+      width: 100%; padding: 16px; border-radius: 12px;
+      font-size: 14px; text-align: center;
+    }
     /* Keep phone internals left-aligned like real iOS */
     .iphone-screen { text-align: left; }
     .notif-stack { bottom: 28px; left: 8px; right: 8px; gap: 6px; }
