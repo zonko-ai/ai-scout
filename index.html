@@ -500,8 +500,9 @@
       order: 2; width: 75vw; max-width: 380px; min-width: 300px;
       flex: none; padding: 0;
       margin: -60px auto 0 auto;
-      overflow: hidden; /* clip phone-glow extending beyond */
+      will-change: auto; /* disable compositing layer on mobile */
     }
+    .phone-glow { display: none; } /* remove glow on mobile — causes bottom overflow */
   }
   @media (max-width: 640px) {
     .hero-content { padding: 20px 0 0; }
@@ -757,8 +758,9 @@
   });
 })();
 
-// ═══ PHONE 3D TILT ═══
+// ═══ PHONE 3D TILT (desktop only) ═══
 (function() {
+  if ('ontouchstart' in window || window.innerWidth <= 960) return;
   var phone = document.getElementById('phone-wrap');
   if (!phone) return;
   document.addEventListener('mousemove', function(e) {
