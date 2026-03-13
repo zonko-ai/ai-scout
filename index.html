@@ -473,27 +473,46 @@
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 960px) {
     html, body { overflow: auto; }
-    .viewport { height: auto; min-height: 100vh; min-height: 100dvh; overflow: visible; }
+    .viewport { height: auto; min-height: 100dvh; overflow: visible; grid-template-rows: auto auto; }
     .hero {
-      flex-direction: column; padding: 24px 24px 48px;
-      text-align: center; justify-content: flex-start; gap: 32px;
+      flex-direction: column; padding: 32px 24px 60px;
+      text-align: center; justify-content: flex-start; gap: 40px;
     }
-    .hero-content { max-width: 100%; order: 1; flex: none; }
+    .hero-content { max-width: 480px; order: 1; flex: none; margin: 0 auto; }
     .hero-headline {
       font-size: clamp(36px, 8vw, 52px);
-      text-align: center; max-width: 100%; margin-left: auto; margin-right: auto;
+      text-align: center; margin-left: auto; margin-right: auto;
     }
     .hero-sub { text-align: center; max-width: 100%; margin-left: auto; margin-right: auto; }
     .cta-wrap { max-width: 100%; margin: 0 auto; }
     .hero-proof { justify-content: center; }
-    .phone-wrap { order: 2; max-width: 260px; min-width: 220px; margin: 0 auto; }
+    .phone-wrap {
+      order: 2; max-width: 280px; min-width: 240px; margin: 0 auto;
+      flex: none;
+    }
   }
   @media (max-width: 640px) {
-    .hero { padding: 20px 20px 40px; gap: 28px; }
+    .hero { padding: 24px 20px 48px; gap: 36px; }
     .hero-headline { font-size: clamp(32px, 9vw, 44px); }
     .hero-proof { gap: 12px; }
     .scout-strip-label { display: none; }
-    .phone-wrap { max-width: 220px; min-width: 180px; }
+    .phone-wrap { max-width: 260px; min-width: 220px; }
+    .notif-stack { bottom: 24px; left: 6px; right: 6px; gap: 5px; }
+    .notif { border-radius: 14px; padding: 8px 10px; }
+    .notif-title { font-size: 12px; }
+    .notif-body { font-size: 11px; }
+    .notif-app-icon { width: 20px; height: 20px; font-size: 13px; border-radius: 5px; }
+    .notif-app-name { font-size: 10px; }
+    .notif-time-label { font-size: 10px; }
+    .dynamic-island { width: 72px; height: 22px; top: 8px; }
+    .ios-time { font-size: 48px; padding-top: 36px; }
+    .ios-date { font-size: 11px; }
+    .ios-weather { font-size: 11px; }
+    .sb { padding: 12px 20px 0; font-size: 11px; }
+    .iphone { border-radius: min(40px, 14%); }
+    .iphone-inner { border-radius: min(38px, 13.5%); }
+    .iphone-screen { border-radius: min(36px, 13%); }
+    .home-indicator { width: 80px; height: 3px; bottom: 6px; }
   }
 </style>
 </head>
