@@ -458,18 +458,6 @@
     width: 1px; height: 14px; background: rgba(0,0,0,0.08); flex-shrink: 0;
   }
 
-  /* ═══ ROHIT TOGGLE ═══ */
-  .rohit-toggle {
-    position: fixed; bottom: 14px; right: 20px; z-index: 100;
-    font-family: var(--font-body); font-size: 11px; font-weight: 400;
-    color: var(--text-20); cursor: pointer; user-select: none;
-    letter-spacing: 0.03em;
-    transition: color 0.3s var(--ease);
-    opacity: 0; animation: fadeUp 0.6s var(--ease) 2s forwards;
-  }
-  .rohit-toggle:hover { color: var(--text-50); }
-  .rohit-toggle.active { color: var(--accent); }
-
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 960px) {
     html, body { height: auto; min-height: 0; overflow-x: hidden; overflow-y: auto; margin: 0; padding: 0; -webkit-overflow-scrolling: touch; }
@@ -669,7 +657,7 @@
     </div>
   </main>
 
-  <span class="rohit-toggle" id="theme-rohit" onclick="toggleRohit()">rohit</span>
+
 </div>
 
 <script>
@@ -1002,66 +990,6 @@ function advanceToConfirm() {
   }, 500);
 }
 
-// ═══ THEME: ROHIT ═══
-var rohitActive = false;
-var defaultVars = {
-  '--bg': '#FFFFEB',
-  '--text': '#1A1A1A',
-  '--text-50': 'rgba(26,26,26,0.5)',
-  '--text-20': 'rgba(26,26,26,0.2)',
-  '--text-70': 'rgba(26,26,26,0.7)',
-  '--accent': '#034f46',
-  '--accent-light': '#067a6e',
-  '--accent-soft': 'rgba(3,79,70,0.06)',
-  '--purple': '#F0D7FF',
-  '--orange': '#FFA946',
-  '--focus': '#4D65FF',
-  '--border': 'rgba(0,0,0,0.06)',
-};
-var rohitVars = {
-  '--bg': '#F5F0E7',
-  '--text': '#1F1A17',
-  '--text-50': '#4E453E',
-  '--text-20': '#9B8F84',
-  '--text-70': '#4E453E',
-  '--accent': '#7A2E2D',
-  '--accent-light': '#A44D4C',
-  '--accent-soft': 'rgba(122,46,45,0.06)',
-  '--purple': '#D7CAD5',
-  '--orange': '#9A7440',
-  '--focus': '#7A96AD',
-  '--border': '#D8CDBD',
-};
-
-function toggleRohit() {
-  var root = document.documentElement;
-  var btn = document.getElementById('theme-rohit');
-  rohitActive = !rohitActive;
-  var vars = rohitActive ? rohitVars : defaultVars;
-  for (var key in vars) {
-    root.style.setProperty(key, vars[key]);
-  }
-  btn.classList.toggle('active', rohitActive);
-
-  var strip = document.querySelector('.scout-strip');
-  var cta = document.querySelector('.cta');
-  if (rohitActive) {
-    document.body.style.background = '#F5F0E7';
-    if (strip) { strip.style.background = '#FBF8F2'; strip.style.borderColor = '#D8CDBD'; }
-    if (cta) { cta.style.background = '#FFFCF8'; }
-    document.querySelectorAll('.pill').forEach(function(p) {
-      if (!p.classList.contains('selected')) p.style.background = 'rgba(255,252,248,0.8)';
-    });
-    document.querySelector('.ios-wall-fallback').style.background =
-      'linear-gradient(170deg, #3B2020 0%, #4A2828 30%, #5C3030 60%, #6E3838 100%)';
-  } else {
-    document.body.style.background = '';
-    if (strip) { strip.style.background = ''; strip.style.borderColor = ''; }
-    if (cta) { cta.style.background = ''; }
-    document.querySelectorAll('.pill').forEach(function(p) { p.style.background = ''; });
-    document.querySelector('.ios-wall-fallback').style.background = '';
-  }
-}
 </script>
 </body>
 </html>
