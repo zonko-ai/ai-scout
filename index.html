@@ -472,7 +472,7 @@
 
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 960px) {
-    html, body { height: auto; min-height: 0; overflow-x: hidden; overflow-y: auto; margin: 0; padding: 0; }
+    html, body { height: auto; min-height: 0; overflow-x: hidden; overflow-y: auto; margin: 0; padding: 0; -webkit-overflow-scrolling: touch; }
     .viewport {
       height: auto; min-height: 0; overflow-x: clip; overflow-y: visible;
       display: flex; flex-direction: column;
@@ -502,7 +502,19 @@
       margin: -60px auto 0 auto;
       will-change: auto; /* disable compositing layer on mobile */
     }
-    .phone-glow { display: none; } /* remove glow on mobile — causes bottom overflow */
+    .phone-glow { display: none; }
+    .phone-wrap { will-change: auto; }
+
+    /* Kill GPU-heavy effects on mobile for smooth scrolling */
+    .bg-grain { display: none; }
+    .bg-mesh { display: none; }
+    .cursor-glow { display: none; }
+    .notif {
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+      background: rgba(30,30,30,0.85);
+      will-change: auto;
+    }
+    .pip { animation: none; opacity: 0.5; }
   }
   @media (max-width: 640px) {
     .hero-content { padding: 20px 0 0; }
@@ -744,8 +756,9 @@
     });
 })();
 
-// ═══ CURSOR GLOW ═══
+// ═══ CURSOR GLOW (desktop only) ═══
 (function() {
+  if ('ontouchstart' in window || window.innerWidth <= 960) return;
   var glow = document.getElementById('cursor-glow');
   var active = false;
   document.addEventListener('mousemove', function(e) {
