@@ -8,3 +8,6 @@ ambient-dreamy.mp4
 ambient-video.mp4
 ios-wallpaper.png
 .DS_Store
+.env.local
+.env.*.local
+.vercel

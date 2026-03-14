@@ -168,11 +168,22 @@
     cursor: pointer; transition: all 0.3s var(--ease);
   }
   .cta-btn:hover { background: var(--accent); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(3,79,70,0.2); }
+  .cta-btn:disabled {
+    cursor: wait; opacity: 0.8; transform: none; box-shadow: none;
+  }
 
   .cta-hint {
     font-family: var(--font-body); font-size: 12px; font-weight: 400;
     color: var(--text-20); margin-top: 10px;
   }
+  .cta-status {
+    min-height: 18px; margin-top: 10px;
+    font-family: var(--font-body); font-size: 12px; font-weight: 500;
+    color: var(--text-20);
+  }
+  .cta-status.is-pending { color: var(--text-50); }
+  .cta-status.is-error { color: #a43d31; }
+  .cta-status.is-success { color: var(--accent); }
 
   /* Topic pills */
   .pills-label {
@@ -259,33 +270,111 @@
 
   .iphone {
     position: relative; width: 100%; aspect-ratio: 393 / 852;
-    background: linear-gradient(155deg, #e8e8e8 0%, #d2d2d2 40%, #c5c5c5 60%, #ddd 100%);
-    border-radius: min(48px, 14%); padding: 2px;
+    background:
+      linear-gradient(160deg, #f6f7f4 0%, #cfd4d0 20%, #9da39f 47%, #ebeeea 72%, #969d99 100%);
+    border: 1px solid rgba(12, 19, 18, 0.62);
+    border-radius: min(48px, 14%); padding: 2.5px;
     box-shadow:
-      inset 0 0.5px 0 rgba(255,255,255,0.9),
-      0 25px 50px rgba(0,0,0,0.12),
-      0 10px 20px rgba(0,0,0,0.08);
+      inset 0 1px 0 rgba(255,255,255,0.78),
+      inset 0 -1px 0 rgba(56,67,64,0.42),
+      inset 1px 0 0 rgba(255,255,255,0.22),
+      inset -1px 0 0 rgba(58,69,66,0.22),
+      0 30px 55px rgba(18,27,25,0.18),
+      0 12px 26px rgba(18,27,25,0.12);
+    overflow: visible;
+    isolation: isolate;
     transition: box-shadow 0.4s var(--ease);
   }
   .phone-wrap:hover .iphone {
     box-shadow:
-      inset 0 0.5px 0 rgba(255,255,255,0.9),
-      0 30px 60px rgba(0,0,0,0.15),
-      0 15px 30px rgba(0,0,0,0.1);
+      inset 0 1px 0 rgba(255,255,255,0.82),
+      inset 0 -1px 0 rgba(56,67,64,0.46),
+      inset 1px 0 0 rgba(255,255,255,0.24),
+      inset -1px 0 0 rgba(58,69,66,0.24),
+      0 34px 64px rgba(18,27,25,0.22),
+      0 16px 34px rgba(18,27,25,0.14);
+  }
+  .iphone::before,
+  .iphone::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    background: linear-gradient(180deg, #c5cbc6 0%, #8d9490 50%, #d2d7d3 100%);
+    box-shadow:
+      inset 0 0.5px 0 rgba(255,255,255,0.4),
+      inset 0 -0.5px 0 rgba(46,55,53,0.4);
+    opacity: 0.95;
+  }
+  .iphone::before {
+    left: -3px; top: 138px;
+    width: 3px; height: 34px;
+    border-radius: 3px 0 0 3px;
+    box-shadow:
+      0 -50px 0 0 rgba(169,176,171,0.95),
+      0 -94px 0 0 rgba(169,176,171,0.95),
+      inset 0 0.5px 0 rgba(255,255,255,0.4),
+      inset 0 -0.5px 0 rgba(46,55,53,0.4);
+  }
+  .iphone::after {
+    right: -3px; top: 188px;
+    width: 3px; height: 72px;
+    border-radius: 0 3px 3px 0;
   }
   .iphone-inner {
+    position: relative;
     width: 100%; height: 100%;
-    background: #000; border-radius: min(46px, 13.5%);
-    padding: 3px; overflow: hidden;
+    background: linear-gradient(180deg, #0d1111 0%, #040606 100%);
+    border-radius: min(46px, 13.5%);
+    padding: 4px; overflow: hidden;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.04),
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      inset 0 -2px 6px rgba(0,0,0,0.55);
+  }
+  .iphone-inner::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.05),
+      inset 0 10px 18px rgba(255,255,255,0.015),
+      inset 0 -14px 18px rgba(0,0,0,0.28);
   }
   .iphone-screen {
     position: relative; width: 100%; height: 100%;
+    background: #081110;
     border-radius: min(43px, 13%); overflow: hidden;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.04),
+      inset 0 22px 34px rgba(255,255,255,0.04),
+      inset 0 -22px 40px rgba(0,0,0,0.18);
+  }
+  .iphone-screen::before,
+  .iphone-screen::after {
+    content: '';
+    position: absolute; inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .iphone-screen::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 18%, rgba(255,255,255,0) 74%, rgba(0,0,0,0.12) 100%);
+  }
+  .iphone-screen::after {
+    box-shadow:
+      inset 0 0 0 0.5px rgba(255,255,255,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      inset 0 -1px 0 rgba(0,0,0,0.15);
   }
 
   .dynamic-island {
     position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-    width: 85px; height: 26px; background: #000; border-radius: 20px; z-index: 30;
+    width: 85px; height: 26px;
+    background: linear-gradient(180deg, #030404 0%, #0a0c0c 100%);
+    border-radius: 20px; z-index: 30;
+    box-shadow:
+      inset 0 0.5px 0 rgba(255,255,255,0.05),
+      0 1px 0 rgba(255,255,255,0.04);
   }
 
   /* Wallpaper */
@@ -344,19 +433,26 @@
     border-radius: 16px; padding: 10px 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15), inset 0 0.5px 0 rgba(255,255,255,0.06);
     will-change: transform, opacity;
-    transform: translate3d(0, 8px, 0) scale(0.98);
+    transform-origin: center bottom;
+    --notif-offset: 0px;
+    --notif-scale: 1;
+    --notif-opacity: 1;
+    transform: translate3d(0, 12px, 0) scale(0.985);
     opacity: 0;
-    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: opacity 0.46s cubic-bezier(0.25, 1, 0.5, 1), transform 0.46s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .notif.show { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-  .notif.minimized {
-    padding: 7px 12px; border-radius: 14px;
-    transform: translate3d(0, 0, 0) scale(0.96);
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  .notif.show {
+    opacity: var(--notif-opacity);
+    transform: translate3d(0, var(--notif-offset), 0) scale(var(--notif-scale));
   }
-  .notif.minimized .notif-body { display: none; }
-  .notif.minimized .notif-title { font-size: 11px; }
-  .notif.minimized .notif-row { margin-bottom: 0; }
+  .notif.depth-0 { --notif-offset: 0px; --notif-scale: 1; --notif-opacity: 1; z-index: 3; }
+  .notif.depth-1 { --notif-offset: -8px; --notif-scale: 0.986; --notif-opacity: 0.92; z-index: 2; }
+  .notif.depth-2 { --notif-offset: -14px; --notif-scale: 0.97; --notif-opacity: 0.78; z-index: 1; }
+  .notif.is-exiting {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, -24px, 0) scale(0.94);
+  }
 
   .notif::before {
     content: ''; position: absolute; inset: 0; border-radius: 16px;
@@ -392,6 +488,17 @@
     font-family: var(--font-ios); font-size: 12px; font-weight: 400;
     color: rgba(255,255,255,0.5); line-height: 1.35;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .notif {
+      transition: none;
+      transform: none;
+    }
+    .notif.show,
+    .notif.is-exiting {
+      transform: none;
+    }
   }
 
   .home-indicator {
@@ -597,10 +704,11 @@
       <div class="cta-wrap" id="cta">
         <div class="cta-step visible" id="step-email">
           <form class="cta" onsubmit="handleSubmit(event)">
-            <input type="email" placeholder="your@email.com" required autocomplete="email" />
+            <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
             <button type="submit" class="cta-btn">Get Early Access</button>
           </form>
           <div class="cta-hint">No credit card needed</div>
+          <div class="cta-status" id="cta-status" role="status" aria-live="polite"></div>
         </div>
         <div class="cta-step hidden" id="step-topics">
           <div class="pills-label">What do you want your first scout to track?</div>
@@ -617,8 +725,8 @@
         </div>
         <div class="cta-step hidden" id="step-confirm">
           <div class="confirm-wrap">
-            <div class="confirm-number">You're <span class="hash">#2,847</span> on the list</div>
-            <div class="confirm-text">We'll activate your scout and ping you the moment it's ready.</div>
+            <div class="confirm-number">You're on the list!</div>
+            <div class="confirm-text">We'll send you the app link very soon.</div>
           </div>
         </div>
       </div>
@@ -811,10 +919,20 @@
     });
   }
 
+  function syncNotificationDepths() {
+    visible.forEach(function(obj, i) {
+      obj.el.classList.remove('depth-0', 'depth-1', 'depth-2');
+      obj.el.classList.add('depth-' + Math.min(i, MAX_VISIBLE - 1));
+    });
+  }
+
   function showNext() {
     if (queue.length === 0) {
       setTimeout(function() {
-        visible.forEach(function(obj) { obj.el.classList.remove('show'); });
+        visible.forEach(function(obj) {
+          obj.el.classList.add('is-exiting');
+          obj.el.classList.remove('show');
+        });
         setTimeout(function() {
           stack.innerHTML = '';
           visible = [];
@@ -827,7 +945,7 @@
 
     var data = queue.shift();
     var el = document.createElement('div');
-    el.className = 'notif';
+    el.className = 'notif depth-0';
     el.innerHTML =
       '<div class="notif-row">' +
         '<div class="notif-app-icon">B</div>' +
@@ -839,15 +957,18 @@
 
     stack.prepend(el);
     visible.unshift({ el: el, data: data });
+    syncNotificationDepths();
 
     if (visible.length > MAX_VISIBLE) {
       var oldest = visible.pop();
-      oldest.el.classList.add('minimized');
+      oldest.el.classList.add('is-exiting');
+      oldest.el.classList.remove('show', 'depth-0', 'depth-1', 'depth-2');
       setTimeout(function() {
         if (oldest.el.parentNode) oldest.el.remove();
-      }, 600);
+      }, 460);
     }
 
+    syncNotificationDepths();
     updateTimes();
 
     requestAnimationFrame(function() {
@@ -930,17 +1051,26 @@ var topicNotifs = {
 };
 var selectedTopics = [];
 var pillTimer = null;
+var waitlistRequestInFlight = false;
 
-function handleSubmit(e) {
-  e.preventDefault();
+function setWaitlistStatus(message, tone) {
+  var statusEl = document.getElementById('cta-status');
+  if (!statusEl) return;
+  statusEl.textContent = message || '';
+  statusEl.className = 'cta-status' + (tone ? ' is-' + tone : '');
+}
+
+function showWaitlistSuccess() {
   var isMobile = window.innerWidth <= 640;
   if (isMobile) {
     // Immersive full-screen confirmation on mobile
+    var existingOverlay = document.querySelector('.mobile-confirm-overlay');
+    if (existingOverlay) existingOverlay.remove();
     var overlay = document.createElement('div');
     overlay.className = 'mobile-confirm-overlay';
     overlay.innerHTML =
       '<div class="confirm-check">✓</div>' +
-      '<div class="confirm-number">You\'re <span class="hash">#2,847</span> on the list</div>' +
+      '<div class="confirm-number">You\'re on the list</div>' +
       '<div class="confirm-text">We\'ll activate your scout and ping you the moment it\'s ready.</div>';
     document.body.appendChild(overlay);
     return;
@@ -950,6 +1080,67 @@ function handleSubmit(e) {
   document.querySelectorAll('#step-topics .pill').forEach(function(p, i) {
     setTimeout(function() { p.classList.add('in'); }, i * 80);
   });
+}
+
+async function readJsonResponse(response) {
+  var text = await response.text();
+  if (!text) return {};
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    return { message: text };
+  }
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  if (waitlistRequestInFlight) return;
+
+  var form = e.target;
+  var input = form.querySelector('input[type="email"]');
+  var button = form.querySelector('.cta-btn');
+  var email = input.value.trim();
+
+  if (!email) {
+    setWaitlistStatus('Enter a valid email address.', 'error');
+    input.focus();
+    return;
+  }
+
+  waitlistRequestInFlight = true;
+  button.disabled = true;
+  button.dataset.originalText = button.textContent;
+  button.textContent = 'Joining...';
+  setWaitlistStatus('Saving your spot...', 'pending');
+
+  var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  var timeoutId = controller ? setTimeout(function() { controller.abort(); }, 10000) : null;
+
+  try {
+    var response = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+      signal: controller ? controller.signal : undefined
+    });
+    var payload = await readJsonResponse(response);
+    if (!response.ok) {
+      throw new Error(payload.error || payload.message || 'Could not join the waitlist right now.');
+    }
+    setWaitlistStatus('', '');
+    showWaitlistSuccess();
+  } catch (error) {
+    var message = error && error.name === 'AbortError'
+      ? 'Request timed out. Please try again.'
+      : (error && error.message) || 'Could not join the waitlist right now.';
+    setWaitlistStatus(message, 'error');
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId);
+    waitlistRequestInFlight = false;
+    button.disabled = false;
+    button.textContent = button.dataset.originalText || 'Get Early Access';
+    delete button.dataset.originalText;
+  }
 }
 
 document.addEventListener('click', function(e) {
@@ -966,7 +1157,10 @@ function advanceToConfirm() {
   document.getElementById('step-topics').classList.replace('visible', 'hidden');
   document.getElementById('step-confirm').classList.replace('hidden', 'visible');
   var stack = document.getElementById('notif-stack');
-  stack.querySelectorAll('.notif').forEach(function(n) { n.classList.remove('show'); });
+  stack.querySelectorAll('.notif').forEach(function(n) {
+    n.classList.add('is-exiting');
+    n.classList.remove('show');
+  });
   var topics = selectedTopics.slice(0, 3);
   var times = ['now', '3m ago', '12m ago'];
   setTimeout(function() {
@@ -975,7 +1169,7 @@ function advanceToConfirm() {
       var d = topicNotifs[topic];
       if (!d) return;
       var el = document.createElement('div');
-      el.className = 'notif';
+      el.className = 'notif depth-' + Math.min(i, 2);
       el.innerHTML =
         '<div class="notif-row">' +
           '<div class="notif-app-icon">B</div>' +
